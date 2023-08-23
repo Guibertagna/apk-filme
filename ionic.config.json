@@ -1,0 +1,7 @@
+{
+  "name": "trabalho-filme",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
