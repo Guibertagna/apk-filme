@@ -11,6 +11,10 @@ const routes: Routes = [
     redirectTo: 'home',
     pathMatch: 'full'
   },
+  {
+    path: 'pratos',
+    loadChildren: () => import('./pratos/pratos.module').then( m => m.PratosPageModule)
+  },
 ];
 
 @NgModule({
