@@ -1,4 +1,3 @@
-
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
@@ -18,8 +17,13 @@
     <ion-item>
       <ion-input label="Duracao" placeholder="Insira o tempo de duração em minutos" type="number" [(ngModel)]="duracao"></ion-input>
     </ion-item>
+    <ion-item>
+      <ion-select label="Avaliação" placeholder="Sua avaliação sobre o filme" [(ngModel)]="avaliacao">
+        <ion-select-option value="Bom">Bom</ion-select-option>
+        <ion-select-option value="Mediano">Mediano</ion-select-option>
+        <ion-select-option value="Ruim">Ruim</ion-select-option>
+      </ion-select>
+    </ion-item>
     <ion-button expand="block" (click)="cadastrar()">Cadastrar</ion-button>
   </ion-list>
-
-
 </ion-content>
