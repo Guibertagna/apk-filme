@@ -4,17 +4,17 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { PratosPageRoutingModule } from './pratos-routing.module';
+import { FilmesPageRoutingModule } from './filmes-routing.module';
 
-import { PratosPage } from './pratos.page';
+import { FilmesPage } from './filmes.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    PratosPageRoutingModule
+    FilmesPageRoutingModule
   ],
-  declarations: [PratosPage]
+  declarations: [FilmesPage]
 })
-export class PratosPageModule {}
+export class FilmesPageModule {}

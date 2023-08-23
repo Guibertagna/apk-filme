@@ -1,0 +1,25 @@
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">cadastrar</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-list>
+    <ion-item>
+      <ion-input label ="Titulo" placeholder="Insira o Titulo do filme" [(ngModel)]="titulo"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input label ="Ano de lançamento" placeholder="Insira o Ano de lançamento" type="number" [(ngModel)]="anoLancamento"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input label="Genero" placeholder="Insira o Genero" [(ngModel)]="genero"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input label="Duracao" placeholder="Insira o tempo de duração em minutos" type="number" [(ngModel)]="duracao"></ion-input>
+    </ion-item>
+    <ion-button expand="block" (click)="cadastrar()">Cadastrar</ion-button>
+  </ion-list>
+
+
+</ion-content>
