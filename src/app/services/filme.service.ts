@@ -17,4 +17,15 @@ export class FilmeService {
   obterTodos(): Filme[]{
     return this.catalogoFilme;
   }
+  obterPorIndice(indice: number){
+    return this.catalogoFilme[indice];
+  }
+
+  editar(indice: number, filmes: Filme){
+    this.catalogoFilme[indice] = filmes;
+  }
+
+  excluir(indice: number){
+    this.catalogoFilme.splice(indice,1);
+  }
 }

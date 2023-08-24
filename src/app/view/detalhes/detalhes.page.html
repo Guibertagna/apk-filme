@@ -1,0 +1,35 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Detalhes</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-list>
+    <ion-item>
+      <ion-toggle (ionChange)="habilitar()" >EDITAR</ion-toggle>
+    </ion-item>
+    
+    <ion-item>
+      <ion-input label=Titulo [(ngModel)] ="titulo" disabled="{{edicao}}"> </ion-input>
+    </ion-item> 
+    
+    <ion-item>
+      <ion-input label=Genero [(ngModel)] ="genero"  disabled="{{edicao}}"> </ion-input>
+    </ion-item>
+    
+    <ion-item>
+      <ion-input label='Ano de Lançamento' [(ngModel)] ="anoLancamento" disabled="{{edicao}}"> </ion-input>
+      </ion-item>
+          <ion-item>
+      <ion-input label='Duração' [(ngModel)] ="duracao" disabled="{{edicao}}"> </ion-input>
+      </ion-item>
+          <ion-item>
+      <ion-input label='Avaliação' [(ngModel)] ="avaliacao" disabled="{{edicao}}"> </ion-input>
+      </ion-item>
+  <ion-item>
+    <ion-button expand="block" (click)="editar()" disabled="{{edicao}}">SALVAR</ion-button>
+    <ion-button expand="block" (click)="confirmar()" color="danger" disabled="{{edicao}}">EXCLUIR</ion-button>
+  </ion-item>
+  </ion-list>
+</ion-content>
