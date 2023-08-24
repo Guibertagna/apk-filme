@@ -6,20 +6,20 @@
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
-
-    
     <ion-toolbar>
       <ion-title size="large">Lista de Filmes</ion-title>
     </ion-toolbar>
-  
   </ion-header>
+
   <ion-list *ngFor="let filme of catalogoFilme; let i= index">
-    <ion-item (click)="editar(i)">
-      
+    <ion-item (click)="editar(i)" class="film-item">
       <ion-icon name="film" slot="start"></ion-icon>
-      <ion-label>Titulo do filme: {{filme.titulo}}</ion-label>
-      <ion-label>Avaliação: {{filme.avaliacao}}</ion-label>
+      <ion-label>
+        <h2>{{filme.titulo}}</h2>
+        <p>Ano: {{filme.anoLancamento}}</p>
+        <p>Avaliação: {{filme.avaliacao}}</p>
+      </ion-label>
     </ion-item>
   </ion-list>
-  <ion-button (click)="irCadastroFilme()">CADASTRAR FILMES</ion-button>
+  <ion-button expand="full" (click)="irCadastroFilme()">CADASTRAR FILMES</ion-button>
 </ion-content>

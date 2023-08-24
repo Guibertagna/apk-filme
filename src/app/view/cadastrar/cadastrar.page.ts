@@ -24,7 +24,7 @@ export class CadastrarPage implements OnInit {
 
   cadastrar(){
     if(this.titulo && this.genero && this.anoLancamento && this.duracao){
-    let novo : Filme = new Filme(this.titulo, this.genero, this.anoLancamento, this.avaliacao, this.duracao);
+    let novo : Filme = new Filme(this.titulo, this.genero, this.duracao, this.avaliacao,  this.anoLancamento);
     this.filmeService.catalogoFilme.push(novo);
     this.presentAlert("Cadastrado", "Filme Cadastrado");
     this.router.navigate(["/filmes"]);
@@ -36,7 +36,7 @@ export class CadastrarPage implements OnInit {
   async presentAlert(header: string, message: string){
     const alert = await this.alertController.create({
       header: header,
-      subHeader: 'Agenda de Contatos',
+      subHeader: 'Cátalogo de filmes',
       message: message,
       buttons: ['OK'],
     });
@@ -44,5 +44,6 @@ export class CadastrarPage implements OnInit {
     await alert.present();
   }
 
+  
 
 }

@@ -8,8 +8,8 @@ export class FilmeService {
   catalogoFilme : Filme [] = [];
 
   constructor() { 
-    let c1: Filme = new Filme("Como eu era antes de você", "romace", 1998,"Bom", 150)
-    let c2: Filme = new Filme("Se beber não case", "comédia", 2000,"Mediano", 125)
+    let c1: Filme = new Filme("Como eu era antes de você", "romace", 150,"Bom", 1998)
+    let c2: Filme = new Filme("Se beber não case", "comédia", 120,"Mediano", 2000)
     this.catalogoFilme.push(c1);
     this.catalogoFilme.push(c2);
   }

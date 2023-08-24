@@ -1,35 +1,78 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>Detalhes</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/filmes"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Detalhes do Filme</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-list>
-    <ion-item>
-      <ion-toggle (ionChange)="habilitar()" >EDITAR</ion-toggle>
-    </ion-item>
-    
-    <ion-item>
-      <ion-input label=Titulo [(ngModel)] ="titulo" disabled="{{edicao}}"> </ion-input>
-    </ion-item> 
-    
-    <ion-item>
-      <ion-input label=Genero [(ngModel)] ="genero"  disabled="{{edicao}}"> </ion-input>
-    </ion-item>
-    
-    <ion-item>
-      <ion-input label='Ano de Lançamento' [(ngModel)] ="anoLancamento" disabled="{{edicao}}"> </ion-input>
-      </ion-item>
-          <ion-item>
-      <ion-input label='Duração' [(ngModel)] ="duracao" disabled="{{edicao}}"> </ion-input>
-      </ion-item>
-          <ion-item>
-      <ion-input label='Avaliação' [(ngModel)] ="avaliacao" disabled="{{edicao}}"> </ion-input>
-      </ion-item>
-  <ion-item>
-    <ion-button expand="block" (click)="editar()" disabled="{{edicao}}">SALVAR</ion-button>
-    <ion-button expand="block" (click)="confirmar()" color="danger" disabled="{{edicao}}">EXCLUIR</ion-button>
-  </ion-item>
-  </ion-list>
+
+  <ion-grid>
+
+    <ion-row>
+      <ion-col size="3" class="align-center">
+        <ion-label>Editar</ion-label>
+      </ion-col>
+      <ion-col size="9">
+        <ion-toggle (ionChange)="habilitar()"></ion-toggle>
+      </ion-col>
+    </ion-row>
+
+
+    <ion-row>
+      <ion-col size="12">
+        <ion-item>
+          <ion-input label="Título: " [(ngModel)]="titulo" [disabled]="edicao"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="12">
+        <ion-item>
+          <ion-input label="Genêro: " [(ngModel)]="genero" [disabled]="edicao"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="12">
+        <ion-item>
+          <ion-input label="Ano de Lançamento: " [(ngModel)]="anoLancamento" [disabled]="edicao"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="12">
+        <ion-item>
+          <ion-input label="Duração: " [(ngModel)]="duracao" [disabled]="edicao"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="12">
+        <ion-item>
+          <ion-select label="Avaliação: " placeholder="Sua avaliação sobre o filme" [(ngModel)]="avaliacao"  [disabled]="edicao">
+            <ion-select-option value="Bom">Bom</ion-select-option>
+            <ion-select-option value="Mediano">Mediano</ion-select-option>
+            <ion-select-option value="Ruim">Ruim</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="6">
+        <ion-button expand="block" (click)="editar()" >Salvar</ion-button>
+      </ion-col>
+      <ion-col size="6">
+        <ion-button expand="block" (click)="confirmar()" color="danger" >Excluir</ion-button>
+      </ion-col>
+    </ion-row>
+
+  </ion-grid>
 </ion-content>

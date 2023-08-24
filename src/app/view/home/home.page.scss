@@ -1,27 +1,36 @@
-#container {
-  text-align: center;
-
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
+#hero-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #000;
 }
 
-#container strong {
-  font-size: 20px;
-  line-height: 26px;
+#hero-section img {
+  width: 150px;
+  height: auto;
+  margin-bottom: 20px;
 }
 
-#container p {
+#hero-section h1 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+#hero-section p {
   font-size: 16px;
-  line-height: 22px;
-
-  color: #8c8c8c;
-
-  margin: 0;
+  text-align: center;
+  margin-bottom: 20px;
 }
 
-#container a {
-  text-decoration: none;
+#hero-section ion-button {
+  margin-top: 20px;
 }
+ion-button {
+  --background: #f39c12;  // Orange background color for the button
+  --color: #000;  // Black text color for the button
+  margin: 16px 0;  // Space above and below the button
+  border-radius: 10px;  // Rounded borders for the button
+}
+
