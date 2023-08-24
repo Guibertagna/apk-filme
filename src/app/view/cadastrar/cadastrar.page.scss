@@ -1,40 +1,39 @@
 ion-content {
-    --background: #000;  // Pure black background for the content
+  --background: #000;  
+}
+
+ion-header {
+  --background: #000;  
+  --color: #f0f0f0;
+}
+
+ion-toolbar {
+  --border-width: 0;
+}
+
+ion-list {
+  padding: 10px;
+}
+
+ion-item {
+  --background: #1a1a1a;
+  --border-color: #333;
+  border-radius: 10px;
+  margin: 8px 0;
+
+  ion-input, ion-select {
+    --placeholder-color: #b2b2b2;
+    --color: #f0f0f0;
   }
-  
-  ion-header {
-    --background: #000;  // Pure black background for the header
-    --color: #f0f0f0;  // Light grey color for the header text
+
+  ion-label {
+    --color: #f0f0f0;
   }
-  
-  ion-toolbar {
-    --border-width: 0;  // Remove border from the toolbar
-  }
-  
-  ion-list {
-    padding: 10px;
-  }
-  
-  ion-item {
-    --background: #1a1a1a;  // Slightly lighter than pure black for item background
-    --border-color: #333;  // Dark grey border for each item
-    border-radius: 10px;  // Rounded borders for each item
-    margin: 8px 0;  // Space between items
-  
-    ion-input, ion-select {
-      --placeholder-color: #b2b2b2;  // Medium grey for placeholders
-      --color: #f0f0f0;  // Light grey for input text
-    }
-  
-    ion-label {
-      --color: #f0f0f0;  // Light grey for label
-    }
-  }
-  
-  ion-button {
-    --background: #f39c12;  // Orange background color for the button
-    --color: #000;  // Black text color for the button
-    margin: 16px 0;  // Space above and below the button
-    border-radius: 10px;  // Rounded borders for the button
-  }
-  
+}
+
+ion-button {
+  --background: #f39c12;
+  --color: #000;
+  margin: 16px 0;
+  border-radius: 10px;
+}
