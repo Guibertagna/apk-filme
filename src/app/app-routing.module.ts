@@ -20,7 +20,7 @@ const routes: Routes = [
     loadChildren: () => import('./view/cadastrar/cadastrar.module').then( m => m.CadastrarPageModule)
   },
   {
-    path: 'detalhes/:indice',
+    path: 'detalhes',
     loadChildren: () => import('./view/detalhes/detalhes.module').then( m => m.DetalhesPageModule)
   },
 

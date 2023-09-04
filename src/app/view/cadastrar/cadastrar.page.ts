@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import Filme from 'src/app/model/entities/Filme';
+import { FirebaseService } from 'src/app/service/firebase-service.service';
 import { FilmeService } from 'src/app/services/filme.service';
 
 @Component({
@@ -17,7 +18,7 @@ export class CadastrarPage implements OnInit {
   public duracao: number;
   catalogoFilme : Filme [] = [];
 
-  constructor(private alertController: AlertController, private router:Router, private filmeService: FilmeService ) { }
+  constructor(private alertController: AlertController, private router:Router, private firebaseService : FirebaseService ) { }
 
   ngOnInit() {
   }
@@ -25,7 +26,7 @@ export class CadastrarPage implements OnInit {
   cadastrar(){
     if(this.titulo && this.genero && this.anoLancamento && this.duracao){
     let novo : Filme = new Filme(this.titulo, this.genero, this.duracao, this.avaliacao,  this.anoLancamento);
-    this.filmeService.catalogoFilme.push(novo);
+    this.firebaseService.cadastrar(novo);
     this.presentAlert("Cadastrado", "Filme Cadastrado");
     this.router.navigate(["/filmes"]);
     }

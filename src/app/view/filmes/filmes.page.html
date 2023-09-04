@@ -12,7 +12,7 @@
   </ion-header>
 
   <ion-list *ngFor="let filme of catalogoFilme; let i= index">
-    <ion-item (click)="editar(i)" class="film-item">
+    <ion-item (click)="editar(filme)" class="film-item">
       <ion-icon name="film" slot="start"></ion-icon>
       <ion-label>
         <h2>{{filme.titulo}}</h2>
@@ -21,5 +21,5 @@
       </ion-label>
     </ion-item>
   </ion-list>
-  <ion-button expand="full" (click)="irCadastroFilme()">CADASTRAR FILMES</ion-button>
+  <ion-button expand="full" (click)="irParaCadastrarPage()">CADASTRAR FILMES</ion-button>
 </ion-content>

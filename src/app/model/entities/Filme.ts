@@ -4,6 +4,7 @@ export default class Filme {
     private _duracao: number;
     private _avaliacao: string;
     private _anoLancamento: number;
+    private _id: string;
    
     constructor(titulo: string, genero: string, duracao:number, avaliacao:string, anoLancamento:number){
         
@@ -12,6 +13,7 @@ export default class Filme {
         this._avaliacao = avaliacao;
         this._genero = genero;
         this._duracao = duracao;
+   
    } 
    /**
      * Getter titulo
@@ -20,7 +22,12 @@ export default class Filme {
 	public get titulo(): string {
 		return this._titulo;
 	}
-
+    public get id(): string {
+        return this._id;
+    }
+    public set id(value: string) {
+        this._id = value;
+    }
     /**
      * Getter genero
      * @return {string}

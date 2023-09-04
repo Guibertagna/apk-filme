@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import Filme from 'src/app/model/entities/Filme';
+import { FirebaseService } from 'src/app/service/firebase-service.service';
 import { FilmeService } from 'src/app/services/filme.service';
 
 @Component({
@@ -19,32 +20,26 @@ export class DetalhesPage implements OnInit {
   indice: number;
   filme: Filme;
   
-  constructor(private actRoute : ActivatedRoute, private filmeService : FilmeService, private router: Router, private alertController: AlertController) { }
+  constructor(private actRoute : ActivatedRoute, private firebaseService : FirebaseService, private router: Router, private alertController: AlertController) { }
 
   ngOnInit() {
-    this.actRoute.params.subscribe((parametros) => {
-      if(parametros["indice"]){
-       this.indice = parametros["indice"];
-       this.filme =
-       this.filmeService.obterPorIndice(this.indice);  
-      }
+      this.filme = history.state.filme
+      console.log(this.filme)  
       this.titulo = this.filme.titulo;
       this.anoLancamento = this.filme.anoLancamento;
       this.genero = this.filme.genero;
       this.avaliacao = this.filme.avaliacao;
       this.duracao = this.filme.duracao;
-    })
+    }
   
-    console.log(this.filme);
-  }
  
   
   
   habilitar(){
-    if(this.edicao){
-      this.edicao=false;
+    if(!this.edicao){
+      this.edicao = true;
     }else{
-      this.edicao=true
+      this.edicao = false;
     }
   }
   confirmar(){
@@ -55,7 +50,7 @@ export class DetalhesPage implements OnInit {
   excluir(){
     
     
-    this.filmeService.excluir(this.indice);
+    this.firebaseService.excluirFilme(this.filme)
     this.router.navigate(["/filmes"])
   }
 
@@ -63,7 +58,7 @@ export class DetalhesPage implements OnInit {
  editar(){
     if(this.titulo && this.genero && this.duracao && this.anoLancamento){
     let novo : Filme =  new Filme(this.titulo, this.genero, this.anoLancamento, this.avaliacao, this.duracao);
-    this.filmeService.editar(this.indice,novo);
+    this.firebaseService.editarFilme(novo, this.filme.id);
     this.router.navigate(["/filmes"])
     this.presentAlert("Salvo", "As edições foram salvas");
     }
