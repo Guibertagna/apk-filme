@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import Filme from 'src/app/model/entities/Filme';
-import { FilmeService } from 'src/app/services/filme.service';
+
 import { FirebaseService } from 'src/app/service/firebase-service.service';
 
 @Component({

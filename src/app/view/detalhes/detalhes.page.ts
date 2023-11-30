@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import Filme from 'src/app/model/entities/Filme';
 import { FirebaseService } from 'src/app/service/firebase-service.service';
-import { FilmeService } from 'src/app/services/filme.service';
+
 
 @Component({
   selector: 'app-detalhes',
@@ -19,8 +19,10 @@ export class DetalhesPage implements OnInit {
   edicao: boolean = true;
   indice: number;
   filme: Filme;
+  imagem : any; 
   
-  constructor(private actRoute : ActivatedRoute, private firebaseService : FirebaseService, private router: Router, private alertController: AlertController) { }
+  constructor(private router: Router,
+    private firebase: FirebaseService) { }
 
   ngOnInit() {
       this.filme = history.state.filme
@@ -28,11 +30,14 @@ export class DetalhesPage implements OnInit {
       this.titulo = this.filme.titulo;
       this.anoLancamento = this.filme.anoLancamento;
       this.genero = this.filme.genero;
-      this.avaliacao = this.filme.avaliacao;
       this.duracao = this.filme.duracao;
+      this.avaliacao = this.filme.avaliacao
     }
   
  
+    uploadImagem(imagem: any){
+      this.imagem = imagem.files
+    }
   
   
   habilitar(){
@@ -42,67 +47,29 @@ export class DetalhesPage implements OnInit {
       this.edicao = false;
     }
   }
-  confirmar(){
-    this.confirmDelete()
-    
-  }
-  
+ 
   excluir(){
     
-    
-    this.firebaseService.excluirFilme(this.filme)
+    this.firebase.excluirFilme(this.filme)
     this.router.navigate(["/filmes"])
-  }
-
-
- editar(){
-    if(this.titulo && this.genero && this.duracao && this.anoLancamento){
-    let novo : Filme =  new Filme(this.titulo, this.genero, this.anoLancamento, this.avaliacao, this.duracao);
-    this.firebaseService.editarFilme(novo, this.filme.id);
-    this.router.navigate(["/filmes"])
-    this.presentAlert("Salvo", "As edições foram salvas");
-    }
-    else{
-      this.presentAlert("Erro", "Campos Nome e Telefone Obrigatórios!");
-    }
-
-  }
-
-  async confirmDelete() {
-    const alert = await this.alertController.create({
-      header: 'Confirmação',
-      message: 'Você realmente deseja excluir este contato?',
-      buttons: [
-        {
-          text: 'Cancelar',
-          role: 'cancel',
-          handler: () => {
-            console.log('Operação de exclusão cancelada.');
-          }
-        },
-        {
-          text: 'Excluir',
-          handler: () => {
-            this.excluir();
-          }
-        }
-      ]
-    });
-    await alert.present();
   }
   
-
-
-  async presentAlert(header: string, message: string){
-    const alert = await this.alertController.create({
-      header: header,
-      subHeader: 'Catalogo de Filmes',
-      message: message,
-      buttons: ['OK'],
-    });
-    await alert.present();
+  editar(){
+    let novo: Filme = new Filme(this.titulo, this.genero, this.anoLancamento, this.avaliacao, this.duracao);
+    novo.id = this.filme.id;
+    if(this.imagem){
+      this.firebase.uploadImage(this.imagem, novo);
+    }else{
+      this.firebase.editarFilme(novo, this.filme.id);
+    }
+    this.firebase.editarFilme(novo, this.filme.id)
+    this.router.navigate(["/filmes"])
   }
 
+
+
+  
+  
 }
 
 

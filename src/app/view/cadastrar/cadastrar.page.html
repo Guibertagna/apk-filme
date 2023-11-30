@@ -46,6 +46,11 @@
           </ion-select>
         </ion-item>
       </ion-col>
+      <ion-item>
+        <ion-button size="default"  color="dark" shape="round">
+          <input type="file" (change)="uploadImagem($event.target)"/>
+        </ion-button>
+      </ion-item>
 
       <ion-col size="12">
         <ion-button expand="block" (click)="cadastrar()">Cadastrar</ion-button>
