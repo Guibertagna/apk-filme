@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import Filme from '../model/entities/Filme';
+import Filme from '../entities/Filme'
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { finalize } from 'rxjs';
@@ -18,16 +18,20 @@ export class FirebaseService {
   }
   cadastrarFilme(filme : Filme){
     return this.angularFirestore.collection(this.PATH)
-    .add({titulo: filme.titulo, anoLancamento: filme.anoLancamento, genero: filme.genero, avaliacao: filme.avaliacao, duracao: filme.duracao});
+    .add({titulo: filme.titulo, anoLancamento: filme.anoLancamento, genero: filme.genero, avaliacao: filme.avaliacao, duracao: filme.duracao, uid: filme.uid});
   }
 
   cadastrarFilmeAvatar(filme : Filme){
     return this.angularFirestore.collection(this.PATH)
-    .add({titulo: filme.titulo, anoLancamento: filme.anoLancamento, genero: filme.genero, avaliacao: filme.avaliacao, duracao: filme.duracao, downloadURL : filme.downloadURL});
+    .add({titulo: filme.titulo, anoLancamento: filme.anoLancamento, genero: filme.genero, avaliacao: filme.avaliacao, duracao: filme.duracao, downloadURL : filme.downloadURL, uid: filme.uid});
   }
   editarFilme(filme: Filme, id: string){
     return this.angularFirestore.collection(this.PATH).doc(id)
-    .update({titulo: filme.titulo, anoLancamento: filme.anoLancamento, duracao: filme.duracao, genero: filme.genero, avaliacao: filme.avaliacao})
+    .update({titulo: filme.titulo, anoLancamento: filme.anoLancamento, duracao: filme.duracao, genero: filme.genero, avaliacao: filme.avaliacao, uid: filme.uid})
+  }
+  read(uid: string){
+    return this.angularFirestore.collection(this.PATH, ref => ref.where('uid','==', uid)).snapshotChanges();
+
   }
 
   editarFilmeAvatar(filme: Filme, id: string){

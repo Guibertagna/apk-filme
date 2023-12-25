@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import Filme from 'src/app/model/entities/Filme';
-import { FirebaseService } from 'src/app/service/firebase-service.service';
-
+import { FirebaseService } from 'src/app/model/service/firebase-service.service';
 
 @Component({
   selector: 'app-detalhes',

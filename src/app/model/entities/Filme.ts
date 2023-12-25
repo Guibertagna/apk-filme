@@ -6,7 +6,7 @@ export default class Filme {
     private _anoLancamento: number;
     private _id: string;
     private _downloadURL: any;
-   
+    private _uid: string;
     constructor(titulo: string, genero: string, duracao:number, avaliacao:string, anoLancamento:number){
         
         this._titulo = titulo;
@@ -106,5 +106,15 @@ export default class Filme {
   public set downloadURL(value: any) {
     this._downloadURL = value;
   }
+  
+  public get uid(): string {
+    return this._uid;
+  }
+  
+  public set uid(value: string) {
+    this._uid = value;
+  }
+
+
 
 }

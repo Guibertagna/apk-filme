@@ -8,7 +8,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'signin',
     pathMatch: 'full'
   },
   {
@@ -23,6 +23,19 @@ const routes: Routes = [
     path: 'detalhes',
     loadChildren: () => import('./view/detalhes/detalhes.module').then( m => m.DetalhesPageModule)
   },
+  {
+    path: 'signin',
+    loadChildren: () => import('./view/usuario/signin/signin.module').then( m => m.SigninPageModule)
+  },
+  {
+    path: 'signin',
+    loadChildren: () => import('./view/usuario/signin/signin.module').then( m => m.SigninPageModule)
+  },
+  {
+    path: 'signup',
+    loadChildren: () => import('./view/usuario/signup/signup.module').then( m => m.SignupPageModule)
+  },
+
 
  
 ];

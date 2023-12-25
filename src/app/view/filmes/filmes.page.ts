@@ -1,21 +1,23 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import Filme from 'src/app/model/entities/Filme';
-
-import { FirebaseService } from 'src/app/service/firebase-service.service';
-
+import { AuthserviceService } from 'src/app/model/service/authservice.service';
+import { FirebaseService } from 'src/app/model/service/firebase-service.service';
 @Component({
   selector: 'app-filmes',
   templateUrl: './filmes.page.html',
   styleUrls: ['./filmes.page.scss'],
 })
 export class FilmesPage implements OnInit {
+  user : any;
   catalogoFilme : Filme [] = [];
+ 
   
-  
-  constructor(private router : Router,
-    private firebaseService: FirebaseService) {
-     this.firebaseService.buscarTodos()
+  constructor(private router : Router, private firebaseService: FirebaseService, private authService : AuthserviceService ) {
+this.user = this.authService.getUserLogged()
+console.log(authService.getUserLogged())
+         console.log(this.catalogoFilme)
+this.firebaseService.read(this.user.uid)
      .subscribe(res => {
        this.catalogoFilme= res.map(filme => {
          return{
@@ -24,8 +26,6 @@ export class FilmesPage implements OnInit {
          }as Filme;
        })
      })
-     
-
    }
    ngOnInit(): void {
        
