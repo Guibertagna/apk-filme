@@ -40,5 +40,18 @@ this.firebaseService.read(this.user.uid)
      {state: {filme:filme}});
    }
  
+   getCorAvaliacao(avaliacao: string): string {
+    switch (avaliacao) {
+      case 'Bom':
+        return 'green';
+      case 'Mediano':
+        return 'yellow';
+      case 'Ruim':
+        return 'red';
+      default:
+        return 'black'; 
+    }
+  }
+  
  }
  

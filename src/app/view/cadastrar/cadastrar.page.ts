@@ -38,10 +38,10 @@ export class CadastrarPage implements OnInit {
     this.formCadastrarFilme = this.formBuilder.group({
       titulo: ['', [Validators.required]],
       genero: ['', [Validators.required, Validators.pattern(/^[A-Z][a-zA-Z]*$/)]],
-      anoLancamento: ['', [Validators.required]],
-      duracao: ['', [Validators.required]],
+      anoLancamento: ['', [Validators.required, Validators.pattern(/^\d{4}$/)]],
+      duracao: ['', [Validators.required, Validators.pattern(/^\d{3}$/)]],
       avaliacao: ['', [Validators.required]],
-    })
+    });
   }
 
   uploadImagem(imagem: any){
@@ -63,5 +63,8 @@ export class CadastrarPage implements OnInit {
     else{
       this.alertService.presentAlert("Erro", " Campos obrigatorios")
     }
+  }
+  todosCamposPreenchidos() {
+    return this.formCadastrarFilme.valid;
   }
 }
