@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AlertController } from '@ionic/angular';
 import { AlertService } from 'src/app/common/alert.service';
 import Filme from 'src/app/model/entities/Filme';
 import { AuthserviceService } from 'src/app/model/service/authservice.service';
 import { FirebaseService } from 'src/app/model/service/firebase-service.service'; 
-
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 @Component({
   selector: 'app-cadastrar',
   templateUrl: './cadastrar.page.html',
@@ -20,20 +19,37 @@ export class CadastrarPage implements OnInit {
   catalogoFilme : Filme [] = [];
   public imagem : any;
   public user : any;
+  formCadastrarFilme: FormGroup;
 
-  constructor(private alertService:AlertService, private router:Router, private firebaseService : FirebaseService, private authService : AuthserviceService ) { 
+  constructor(private alertService:AlertService, private router:Router, private firebaseService : FirebaseService, private authService : AuthserviceService, private formBuilder: FormBuilder ) { 
     this.user = this.authService.getUserLogged();
+    
+   this.formCadastrarFilme = new FormGroup({
+    titulo : new FormControl(''),
+    genero : new FormControl(''),
+    anoLancamento : new FormControl(''),
+    duracao : new FormControl(''),
+    avaliacao : new FormControl(''),
+
+   })
   }
 
   ngOnInit() {
+    this.formCadastrarFilme = this.formBuilder.group({
+      titulo: ['', [Validators.required]],
+      genero: ['', [Validators.required, Validators.pattern(/^[A-Z][a-zA-Z]*$/)]],
+      anoLancamento: ['', [Validators.required]],
+      duracao: ['', [Validators.required]],
+      avaliacao: ['', [Validators.required]],
+    })
   }
 
   uploadImagem(imagem: any){
     this.imagem = imagem.files
   }
   cadastrar(){
-    if(this.titulo && this.genero && this.anoLancamento && this.duracao){
-    let novo : Filme = new Filme(this.titulo, this.genero, this.duracao, this.avaliacao,  this.anoLancamento);
+    if(this.formCadastrarFilme.value['titulo'] && this.formCadastrarFilme.value['genero']  && this.formCadastrarFilme.value['anoLancamento']  && this.formCadastrarFilme.value['duracao']){
+    let novo : Filme = new Filme(this.formCadastrarFilme.value['titulo'], this.formCadastrarFilme.value['genero'], this.formCadastrarFilme.value['duracao'], this.formCadastrarFilme.value['avaliacao'],  this.formCadastrarFilme.value['anoLancamento']);
     novo.uid = this.user.uid;
     console.log(this.user.uid)
     if(this.imagem){

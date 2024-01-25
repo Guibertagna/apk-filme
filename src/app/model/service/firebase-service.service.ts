@@ -25,10 +25,14 @@ export class FirebaseService {
     return this.angularFirestore.collection(this.PATH)
     .add({titulo: filme.titulo, anoLancamento: filme.anoLancamento, genero: filme.genero, avaliacao: filme.avaliacao, duracao: filme.duracao, downloadURL : filme.downloadURL, uid: filme.uid});
   }
+
+
   editarFilme(filme: Filme, id: string){
     return this.angularFirestore.collection(this.PATH).doc(id)
     .update({titulo: filme.titulo, anoLancamento: filme.anoLancamento, duracao: filme.duracao, genero: filme.genero, avaliacao: filme.avaliacao, uid: filme.uid})
   }
+
+  
   read(uid: string){
     return this.angularFirestore.collection(this.PATH, ref => ref.where('uid','==', uid)).snapshotChanges();
 
