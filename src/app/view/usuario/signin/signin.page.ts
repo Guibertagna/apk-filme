@@ -47,7 +47,7 @@ export class SigninPage implements OnInit {
 
   submitForm(): boolean {
     if (!this.formLogar.valid) {
-      this.alertService.presentAlert('BURRO', 'FAZ DE NOVO');
+      this.alertService.presentAlert('Erro ao logar', 'Erro ao logar');
       return false;
     } else {
       this.alertService.simpleLoader();

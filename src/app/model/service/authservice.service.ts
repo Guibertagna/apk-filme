@@ -11,7 +11,7 @@ export class AuthserviceService {
 
   usuarioDados: any;
 
-  constructor(private firebase: FirebaseService, private fireAuth: AngularFireAuth, private router: Router, private ngZone: NgZone) {
+  constructor(private firebase: FirebaseService, private fireAuth: AngularFireAuth, private router: Router, private ngZone: NgZone,  private authService: AuthserviceService) {
     this.fireAuth.authState.subscribe(user => {
       if (user) {
         this.usuarioDados = user;
@@ -66,4 +66,5 @@ export class AuthserviceService {
     const auth = getAuth();
     return signInWithPopup(auth, provider, browserPopupRedirectResolver);
   }
+  
 }

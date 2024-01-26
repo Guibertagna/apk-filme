@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AlertService } from 'src/app/common/alert.service';
 import Filme from 'src/app/model/entities/Filme';
 import { AuthserviceService } from 'src/app/model/service/authservice.service';
 import { FirebaseService } from 'src/app/model/service/firebase-service.service';
@@ -13,7 +14,7 @@ export class FilmesPage implements OnInit {
   catalogoFilme : Filme [] = [];
  
   
-  constructor(private router : Router, private firebaseService: FirebaseService, private authService : AuthserviceService ) {
+  constructor(private router : Router, private firebaseService: FirebaseService, private authService : AuthserviceService, private alertService : AlertService ) {
 this.user = this.authService.getUserLogged()
 console.log(authService.getUserLogged())
          console.log(this.catalogoFilme)
@@ -52,6 +53,21 @@ this.firebaseService.read(this.user.uid)
         return 'black'; 
     }
   }
+  async fazerLogout() {
+    try {
+      this.alertService.simpleLoader(); 
+      await this.authService.signOut(); 
+      this.router.navigate(['/signin']); 
+      this.alertService.presentAlert("Deslogar", "Sucesso ao Deslogar!")
+      setTimeout(() => {
+        this.alertService.dismissLoader();
+      }, 500);
+    } catch (error) {
+      this.alertService.presentAlert("Deslogar", "Erro ao Deslogar!")
+      this.alertService.dismissLoader();
+    }
+  }
+  }
   
- }
+
  

@@ -32,19 +32,23 @@ export class SignupPage implements OnInit {
   }
   cadastrar(){
     this.authService.signUpWithEmailAndPassword(this.formCadastrar.value['email'], this.formCadastrar.value['senha']).then((res)=>{
+      this.alertService.dismissLoader();
       this.alertService.presentAlert("cadastro", "cadastro realizado com sucesso")
       this.alertService.presentAlert("ola","seja bem vindo");
-      this.router.navigate(["singnin"])
+      this.router.navigate(["home"])
     }).catch((error)=>{
+      this.alertService.dismissLoader();
       this.alertService.presentAlert("cadastro", "cadastro não realizado com sucesso")
       console.log(error.message)
     })
 }
   submitForm() : boolean{
     if(!this.formCadastrar.valid || this.formCadastrar.value['senha'] != this.formCadastrar.value['confsenha']){
-      this.alertService.presentAlert("BURRO","FAZ DE NOVO");
+      this.alertService.presentAlert("Cadastro","Cadastro não realizado");
+      this.alertService.simpleLoader();
       return false
     }else{
+      this.alertService.simpleLoader();
       this.cadastrar();
       return true;
     }
