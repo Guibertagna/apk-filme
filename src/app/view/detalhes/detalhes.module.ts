@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { DetalhesPageRoutingModule } from './detalhes-routing.module';
 
 import { DetalhesPage } from './detalhes.page';
+import { ComponentsModule } from 'src/app/components/components.module';
 
 @NgModule({
   imports: [
@@ -14,7 +15,8 @@ import { DetalhesPage } from './detalhes.page';
     FormsModule,
     IonicModule,
     ReactiveFormsModule,
-    DetalhesPageRoutingModule
+    DetalhesPageRoutingModule,
+    ComponentsModule
   ],
   declarations: [DetalhesPage]
 })

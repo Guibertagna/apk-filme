@@ -1,81 +1,15 @@
 <ion-content [fullscreen]="true">
   <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-back-button defaultHref="/filmes"></ion-back-button>
-    </ion-buttons>
-    <ion-title>Detalhes do Filme</ion-title>
-  </ion-toolbar>
-</ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref="/filmes"></ion-back-button>
+      </ion-buttons>
+      <ion-title>Detalhes do Filme</ion-title>
+    </ion-toolbar>
+  </ion-header>
 
-
-<ion-grid>
-  <form [formGroup]="formAtualizaFilme" (ngSubmit)="editar()">
-  <ion-row>
-
-    <form [formGroup]="formAtualizaFilme" (ngSubmit)="editar()">
-      <ion-toggle (ionChange)="habilitar()"></ion-toggle>
- 
-
-  <ion-col size="12">
-      <ion-item [disabled]="edicao">
-        <ion-label position="floating">Título</ion-label>
-        <ion-input formControlName="titulo"></ion-input>
-      </ion-item>
-      <ion-note *ngIf="formAtualizaFilme.get('titulo')?.touched && formAtualizaFilme.get('titulo')?.hasError('required')">Título obrigatório</ion-note>
-    </ion-col>
-
-    <ion-col size="12">
-      <ion-item [disabled]="edicao">
-        <ion-label position="floating">Gênero</ion-label>
-        <ion-input formControlName="genero"></ion-input>
-      </ion-item>
-      <ion-note *ngIf="formAtualizaFilme.get('genero')?.touched && formAtualizaFilme.get('genero')?.hasError('required')">Gênero obrigatório</ion-note>
-      <ion-note *ngIf="formAtualizaFilme.get('genero')?.touched && formAtualizaFilme.get('genero')?.hasError('pattern')">Gênero deve iniciar com letra maiúscula</ion-note>
-    </ion-col>
-
-    <ion-col size="12">
-      <ion-item [disabled]="edicao">
-        <ion-label position="floating">Ano de Lançamento</ion-label>
-        <ion-input formControlName="anoLancamento"></ion-input>
-      </ion-item>
-      <ion-note *ngIf="formAtualizaFilme.get('anoLancamento')?.touched && formAtualizaFilme.get('anoLancamento')?.hasError('required')">Ano de lançamento obrigatório</ion-note>
-      <ion-note *ngIf="formAtualizaFilme.get('anoLancamento')?.touched && formAtualizaFilme.get('anoLancamento')?.hasError('pattern')">Ano de lançamento deve ter 4 dígitos numéricos</ion-note>
-    </ion-col>
-
-    <ion-col size="12">
-      <ion-item [disabled]="edicao">
-        <ion-label position="floating">Duração</ion-label>
-        <ion-input formControlName="duracao"></ion-input>
-      </ion-item>
-      <ion-note *ngIf="formAtualizaFilme.get('duracao')?.touched && formAtualizaFilme.get('duracao')?.hasError('required')">Duração obrigatória</ion-note>
-      <ion-note *ngIf="formAtualizaFilme.get('duracao')?.touched && formAtualizaFilme.get('duracao')?.hasError('pattern')">Duração deve ter 3 dígitos numéricos</ion-note>
-    </ion-col>
-
-    <ion-col size="12">
-      <ion-item [disabled]="edicao">
-        <ion-label>Avaliação</ion-label>
-        <ion-select placeholder="Sua avaliação sobre o filme" formControlName="avaliacao">
-          <ion-select-option value="Bom">Bom</ion-select-option>
-          <ion-select-option value="Mediano">Mediano</ion-select-option>
-          <ion-select-option value="Ruim">Ruim</ion-select-option>
-        </ion-select>
-      </ion-item>
-      <ion-note *ngIf="formAtualizaFilme.get('avaliacao')?.touched && formAtualizaFilme.get('avaliacao')?.hasError('required')">Avaliação obrigatória</ion-note>
-    </ion-col>
-
-      <ion-item [disabled]="edicao" >
-        <img [src]="filme.downloadURL" />
-      </ion-item>
-
-      <ion-item [disabled]="edicao">
-        <ion-button size="default" color="dark" shape="round">
-          <input type="file" (change)="uploadImagem($event)" />
-        </ion-button>
-      </ion-item>
-      <!-- Adicione [disabled] ao botão de salvar -->
-      <ion-button  expand="block" (click)="editar()" [disabled]="!todosCamposPreenchidos()">Salvar</ion-button>
-      <ion-button expand="block" (click)="excluir()" [disabled]="edicao" color="danger">Excluir</ion-button>
-    </form>
-
-    
+  <ion-grid>
+    <ion-toggle (ionChange)="habilitar()"></ion-toggle>
+    <app-detalhar-component [filme]="filme" [disabled]="edicao"></app-detalhar-component>
+  </ion-grid>
+</ion-content>

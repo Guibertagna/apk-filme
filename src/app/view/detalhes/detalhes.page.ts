@@ -16,7 +16,7 @@ export class DetalhesPage implements OnInit {
   filme: Filme;
   imagem: any;
   user: any;
-  formAtualizaFilme: FormGroup;
+  formAtualizaFilme: FormGroup; // Inicialize o formulário aqui
 
   constructor(
     private router: Router,
@@ -26,6 +26,7 @@ export class DetalhesPage implements OnInit {
     private alert: AlertService
   ) {
     this.user = this.authService.getUserLogged();
+    // Inicialize o formulário no construtor
     this.formAtualizaFilme = this.formBuilder.group({
       titulo: ['', [Validators.required]],
       genero: ['', [Validators.required, Validators.pattern(/^[A-Z][a-zA-Z]*$/)]],
@@ -74,7 +75,6 @@ export class DetalhesPage implements OnInit {
       this.formAtualizaFilme.value['duracao'],
       this.formAtualizaFilme.value['avaliacao'],
       this.formAtualizaFilme.value['anoLancamento']    
-     
     );
 
     novo.id = this.filme.id;

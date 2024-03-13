@@ -1,11 +1,11 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>Lista de Filmes</ion-title>
-    
-      <ion-button (click)="fazerLogout()" slot="end">
-        <ion-icon name="log-out"></ion-icon> <!-- Substitua "log-out" pelo nome do ícone desejado -->
+    <ion-buttons slot="end">
+      <ion-button (click)="fazerLogout()">
+        <ion-icon name="log-out"></ion-icon>
       </ion-button>
-  
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -15,27 +15,21 @@
       <ion-title size="large">Lista de Filmes</ion-title>
     </ion-toolbar>
   </ion-header>
-
-
   <ion-grid>
-
-    
+    <ion-searchbar placeholder="Pesquisar filmes..." (ionChange)="onSearchChange($event)"></ion-searchbar>
+    <app-loading-screen *ngIf="!isLoading"></app-loading-screen>
+    <app-empty-screen *ngIf="filteredFilmes.length == 0 && isSearching"></app-empty-screen>
     <ion-row>
-      <ion-col size="12" *ngFor="let filme of catalogoFilme; let i= index">
-        <ion-item (click)="editar(filme)" class="film-item">
-          <ion-thumbnail *ngIf="filme.downloadURL != null " slot="start">
-            <img src="{{filme.downloadURL}}" />
-          </ion-thumbnail>
-          <ion-icon name="film" slot="start" *ngIf="filme.downloadURL == null"></ion-icon>
-          <ion-label>
-            <h2>{{filme.titulo}}</h2>
-            <p>Ano: {{filme.anoLancamento}}</p>
-            <p [ngStyle]="{'color': getCorAvaliacao(filme.avaliacao)}">Avaliação: {{filme.avaliacao}}</p>
-          </ion-label>
-        </ion-item>
+      <ion-col size="12">
+        <ng-container *ngIf="!isSearching">
+          <app-filmes-component *ngFor="let filme of catalogoFilme; let i = index" [filme]="filme" (click)="editar(filme)"></app-filmes-component>
+        </ng-container>
+        <ng-container *ngIf="isSearching">
+          <app-filmes-component *ngFor="let filme of filteredFilmes; let i = index" [filme]="filme" (click)="editar(filme)"></app-filmes-component>
+        </ng-container>
       </ion-col>
     </ion-row>
   </ion-grid>
 
-  <ion-button expand="full" (click)="irParaCadastrarPage()">CADASTRAR FILMES</ion-button>
+  <ion-button  expand="full" (click)="irParaCadastrarPage()">CADASTRAR FILMES</ion-button>
 </ion-content>

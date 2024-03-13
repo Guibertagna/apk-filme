@@ -1,0 +1,75 @@
+<form [formGroup]="formAtualizaFilme" (ngSubmit)="editar()">
+  <ion-row>
+    <ion-col size="12">
+      <ion-item>
+        <ion-label position="floating">Título</ion-label>
+        <ion-input formControlName="titulo" [(ngModel)]="filme.titulo"></ion-input>
+      </ion-item>
+      <ion-note *ngIf="formAtualizaFilme.get('titulo')?.touched && formAtualizaFilme.get('titulo')?.hasError('required')">Título obrigatório</ion-note>
+    </ion-col>
+
+    <ion-col size="12">
+      <ion-item>
+        <ion-label position="floating">Gênero</ion-label>
+        <ion-input formControlName="genero" [(ngModel)]="filme.genero"></ion-input>
+      </ion-item>
+      <ion-note *ngIf="formAtualizaFilme.get('genero')?.touched && formAtualizaFilme.get('genero')?.hasError('required')">Gênero obrigatório</ion-note>
+      <ion-note *ngIf="formAtualizaFilme.get('genero')?.touched && formAtualizaFilme.get('genero')?.hasError('pattern')">Gênero deve iniciar com letra maiúscula</ion-note>
+    </ion-col>
+
+    <ion-col size="12">
+      <ion-item >
+        <ion-label position="floating">Ano de Lançamento</ion-label>
+        <ion-input formControlName="anoLancamento" [(ngModel)]="filme.anoLancamento"></ion-input>
+      </ion-item>
+      <ion-note *ngIf="formAtualizaFilme.get('anoLancamento')?.touched && formAtualizaFilme.get('anoLancamento')?.hasError('required')">Ano de lançamento obrigatório</ion-note>
+      <ion-note *ngIf="formAtualizaFilme.get('anoLancamento')?.touched && formAtualizaFilme.get('anoLancamento')?.hasError('pattern')">Ano de lançamento deve ter 4 dígitos numéricos</ion-note>
+    </ion-col>
+
+    <ion-col size="12">
+      <ion-item>
+        <ion-label position="floating">Duração</ion-label>
+        <ion-input formControlName="duracao" [(ngModel)]="filme.duracao"></ion-input>
+      </ion-item>
+      <ion-note *ngIf="formAtualizaFilme.get('duracao')?.touched && formAtualizaFilme.get('duracao')?.hasError('required')">Duração obrigatória</ion-note>
+      <ion-note *ngIf="formAtualizaFilme.get('duracao')?.touched && formAtualizaFilme.get('duracao')?.hasError('pattern')">Duração deve ter 3 dígitos numéricos</ion-note>
+    </ion-col>
+
+    <ion-col size="12">
+      <ion-item >
+        <ion-label>Avaliação</ion-label>
+        <ion-select placeholder="Sua avaliação sobre o filme" formControlName="avaliacao" [(ngModel)]="filme.avaliacao">
+          <ion-select-option value="Bom">Bom</ion-select-option>
+          <ion-select-option value="Mediano">Mediano</ion-select-option>
+          <ion-select-option value="Ruim">Ruim</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-note *ngIf="formAtualizaFilme.get('avaliacao')?.touched && formAtualizaFilme.get('avaliacao')?.hasError('required')">Avaliação obrigatória</ion-note>
+    </ion-col>
+    <ion-col size="12">
+      <ion-item>
+        <img [src]="filme.downloadURL" />
+      </ion-item>
+    </ion-col>
+
+    <ion-col size="12">
+      <ion-item>
+        <ion-button size="default" color="dark" shape="round" (click)="uploadImagem($event)">
+          Alterar Imagem
+        </ion-button>
+      </ion-item>
+    </ion-col>
+
+    <ion-col size="12">
+      <ion-button expand="block" [disabled]="!todosCamposPreenchidos()" color="primary" type="submit">
+        Salvar
+      </ion-button>
+    </ion-col>
+
+    <ion-col size="12">
+      <ion-button expand="block" color="danger" (click)="excluir()">
+        Excluir
+      </ion-button>
+    </ion-col>
+  </ion-row>
+</form>

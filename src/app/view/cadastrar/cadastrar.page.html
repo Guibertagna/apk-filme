@@ -5,70 +5,12 @@
       <ion-buttons slot="start">
         <ion-back-button defaultHref="/filmes"></ion-back-button>
       </ion-buttons>
+          
       <ion-title>Cadastrar  Filme</ion-title>
     </ion-toolbar>
   </ion-header>
   
   <ion-grid>
-    <form [formGroup]="formCadastrarFilme" (ngSubmit)="cadastrar()">
-    <ion-row>
-
-
-      <ion-col size="12">
-        <ion-item>
-          <ion-input placeholder="Digite o Título" label="Título  do Filme" formControlName="titulo"></ion-input>
-        </ion-item>
-        <span *ngIf="formCadastrarFilme.get('titulo')?.touched && formCadastrarFilme.get('titulo')?.errors?.['required']">Título obrigatório</span>
-      </ion-col>
-      
-      <ion-col size="12">
-        <ion-item>
-          <ion-input type="number" placeholder="Ex: 2023" label="Ano de Lançamento"formControlName="anoLancamento"></ion-input>
-        </ion-item>
-        <span *ngIf="formCadastrarFilme.get('anoLancamento')?.touched && formCadastrarFilme.get('anoLancamento')?.errors?.['required']">Ano de lançamento obrigatório</span>
-        <span *ngIf="formCadastrarFilme.get('anoLancamento')?.touched && formCadastrarFilme.get('anoLancamento')?.hasError('pattern')">Ano de lançamento deve ter 4 dígitos numéricos</span>
-        
-      </ion-col>
-      
-      <ion-col size="12">
-        <ion-item>
-          <ion-input placeholder="Ex: Ação" label="Gênero" formControlName="genero"></ion-input>
-        </ion-item>
-        <span *ngIf="formCadastrarFilme.get('genero')?.touched && formCadastrarFilme.get('genero')?.errors?.['required']">Genero obrigatório</span>
-        <span *ngIf="formCadastrarFilme.get('genero')?.touched && formCadastrarFilme.get('genero')?.hasError('pattern')">Gênero deve iniciar com letra maiúscula</span>
-        
-      </ion-col>
-
-      <ion-col size="12">
-        <ion-item>
-          <ion-input type="number" placeholder="Ex: 120" label="Duração" formControlName="duracao"></ion-input>
-        </ion-item>
-        <span *ngIf="formCadastrarFilme.get('duracao')?.touched && formCadastrarFilme.get('duracao')?.errors?.['required']">Duração obrigatório</span>
-        <span *ngIf="formCadastrarFilme.get('duracao')?.touched && formCadastrarFilme.get('duracao')?.hasError('pattern')">Duração deve ter 3 dígitos numéricos</span>
-        
-      </ion-col>
-
-      <ion-col size="12">
-        <ion-item>
-          <ion-select label="Avaliação" placeholder="Sua avaliação sobre o filme" formControlName="avaliacao">
-            <ion-select-option value="Bom">Bom</ion-select-option>
-            <ion-select-option value="Mediano">Mediano</ion-select-option>
-            <ion-select-option value="Ruim">Ruim</ion-select-option>
-          </ion-select>
-        </ion-item>
-        <span *ngIf="formCadastrarFilme.get('avaliacao')?.touched && formCadastrarFilme.get('avaliacao')?.errors?.['required']">Avaliação obrigatório</span>
-      </ion-col>
-      <ion-item>
-        <ion-button size="default"  color="dark" shape="round">
-          <input type="file" (change)="uploadImagem($event.target)"/>
-        </ion-button>
-      </ion-item>
-
-      <ion-col size="12">
-        <ion-button  expand="block" (click)="cadastrar()" [disabled]="!todosCamposPreenchidos()">Cadastrar</ion-button>
-      </ion-col>
-
-    </ion-row>
-  </form>
+    <app-cadastrar-component (formularioEnviado)="onSubmit($event)" ></app-cadastrar-component>
   </ion-grid>
 

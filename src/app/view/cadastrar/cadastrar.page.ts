@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Injectable, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertService } from 'src/app/common/alert.service';
 import Filme from 'src/app/model/entities/Filme';
@@ -9,6 +9,9 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
   selector: 'app-cadastrar',
   templateUrl: './cadastrar.page.html',
   styleUrls: ['./cadastrar.page.scss'],
+})
+@Injectable({
+  providedIn: 'root'
 })
 export class CadastrarPage implements OnInit {
   public titulo: string;
@@ -35,33 +38,26 @@ export class CadastrarPage implements OnInit {
   }
 
   ngOnInit() {
-    this.formCadastrarFilme = this.formBuilder.group({
-      titulo: ['', [Validators.required]],
-      genero: ['', [Validators.required, Validators.pattern(/^[A-Z][a-zA-Z]*$/)]],
-      anoLancamento: ['', [Validators.required, Validators.pattern(/^\d{4}$/)]],
-      duracao: ['', [Validators.required, Validators.pattern(/^\d{3}$/)]],
-      avaliacao: ['', [Validators.required]],
-    });
+   
   }
 
   uploadImagem(imagem: any){
     this.imagem = imagem.files
   }
-  cadastrar(){
-    if(this.formCadastrarFilme.value['titulo'] && this.formCadastrarFilme.value['genero']  && this.formCadastrarFilme.value['anoLancamento']  && this.formCadastrarFilme.value['duracao']){
-    let novo : Filme = new Filme(this.formCadastrarFilme.value['titulo'], this.formCadastrarFilme.value['genero'], this.formCadastrarFilme.value['duracao'], this.formCadastrarFilme.value['avaliacao'],  this.formCadastrarFilme.value['anoLancamento']);
-    novo.uid = this.user.uid;
-    console.log(this.user.uid)
-    if(this.imagem){
-      this.firebaseService.uploadImage(this.imagem, novo)
-    }else{
-      this.firebaseService.cadastrarFilme(novo);
-    }
-   this.alertService.presentAlert("Sucesso", "Filme Cadastrado!")
-    this.router.navigate(["/filmes"]);
-    }
-    else{
-      this.alertService.presentAlert("Erro", " Campos obrigatorios")
+  onSubmit(formulario: FormGroup) {
+    if (formulario.valid) {
+      const novoFilme = new Filme(
+        formulario.value.titulo,
+        formulario.value.genero,
+        formulario.value.duracao,
+        formulario.value.avaliacao,
+        formulario.value.anoLancamento
+      );
+      novoFilme.uid = this.user.uid;
+      this.firebaseService.cadastrarFilme(novoFilme);
+      this.alertService.presentAlert('Sucesso', 'Filme Cadastrado!');
+    } else {
+      this.alertService.presentAlert('Erro', 'Campos obrigatórios');
     }
   }
   todosCamposPreenchidos() {
