@@ -19,6 +19,7 @@
     <ion-searchbar placeholder="Pesquisar filmes..." (ionChange)="onSearchChange($event)"></ion-searchbar>
     <app-loading-screen *ngIf="!isLoading"></app-loading-screen>
     <app-empty-screen *ngIf="filteredFilmes.length == 0 && isSearching"></app-empty-screen>
+    <app-empty-screen *ngIf="catalogoFilme.length == 0 && !isSearching && filteredFilmes.length == 0"></app-empty-screen>
     <ion-row>
       <ion-col size="12">
         <ng-container *ngIf="!isSearching">

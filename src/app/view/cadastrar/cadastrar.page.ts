@@ -56,6 +56,7 @@ export class CadastrarPage implements OnInit {
       novoFilme.uid = this.user.uid;
       this.firebaseService.cadastrarFilme(novoFilme);
       this.alertService.presentAlert('Sucesso', 'Filme Cadastrado!');
+      this.router.navigate(['/filmes']);
     } else {
       this.alertService.presentAlert('Erro', 'Campos obrigatórios');
     }
